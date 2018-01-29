@@ -1,0 +1,9 @@
+<resources>
+	<string name="app_name">管理器</string>
+    <string name="set_password">设置密码</string>
+    <string name="all_setting">常用设置</string>
+    <string name="people_jilu">人物记录</string>
+    <string name="down">下载</string>
+    <string name="new_down">新建下载</string>
+    <string name="down_hostory">下载记录</string>
+</resources>

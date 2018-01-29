@@ -17,10 +17,9 @@ import com.evil.baselib.base.BaseActivity;
 import com.evil.baselib.db.InputHistoryInfo;
 import com.evil.web.adapter.InputHistoryAdapter;
 import com.fxc.util.KeyboardUtils;
-import com.fxc.util.ToastUtils;
+import com.fxc.util.RefreshUtils;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
-import com.lcodecore.tkrefreshlayout.footer.LoadingView;
 
 import org.litepal.crud.DataSupport;
 
@@ -56,7 +55,7 @@ public class InputActivity
         mTkrefresh = (TwinklingRefreshLayout) findViewById(R.id.tkrefresh);
         mInput = (EditText) findViewById(R.id.input);
         mInput.setOnKeyListener(mOnKeyListener);
-        mTkrefresh.setBottomView(new LoadingView(getContext()));
+        RefreshUtils.initRefreshLayout(mTkrefresh,this);
         mTkrefresh.setEnableRefresh(false);
         mTkrefresh.setOnRefreshListener(mRefreshListener);
         mAdapter = new InputHistoryAdapter(this);
@@ -133,7 +132,7 @@ public class InputActivity
                                   .toString()
                                   .trim();
         if (TextUtils.isEmpty(inputString)) {
-            ToastUtils.showShort("请输入网址");
+            toast("请输入网址");
             return;
         }
         InputHistoryInfo info = new InputHistoryInfo(inputString);

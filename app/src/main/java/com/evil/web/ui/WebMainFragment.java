@@ -9,13 +9,13 @@ import android.widget.ImageView;
 
 import com.evil.app.R;
 import com.evil.baselib.base.BaseFragment;
+import com.evil.baselib.db.FavoriteInfo;
 import com.evil.web.intface.SettingListener;
 import com.evil.web.intface.WebAddCallback;
 import com.fxc.auto.utils.AutoUtils;
 import com.fxc.base.view.SuspendView;
 import com.fxc.impl.OnSuspendClickListener;
-import com.fxc.util.SpUtils;
-import com.fxc.util.TestUtils;
+import com.fxc.util.TimeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +111,6 @@ public class WebMainFragment extends BaseFragment implements SettingListener, We
             } else if (resultCode == INPUT_URL_RESULT_CODE) {
                 String url = data.getStringExtra("url");
                 mCurrentWeb.loadUrl(url);
-                TestUtils.log(url);
             }
         }
     }
@@ -128,7 +127,10 @@ public class WebMainFragment extends BaseFragment implements SettingListener, We
 
     @Override
     public void onAdd() {
-        toast("添加新页面");
+        AddDialog dialog = new AddDialog(getContext());
+        dialog.setData(mWebData);
+        dialog.setWebAddCallback(this);
+        dialog.show();
     }
 
     @Override
@@ -138,16 +140,17 @@ public class WebMainFragment extends BaseFragment implements SettingListener, We
 
     @Override
     public void onCollect() {
-        boolean js = SpUtils.getInfo("js", true);
-        SpUtils.save(this, "js", !js);
-        mCurrentWeb.setJs(!js);
+        FavoriteInfo info = new FavoriteInfo();
+        info.setUrl(mCurrentWeb.getUrl());
+        info.setTitle(mCurrentWeb.getTitle());
+        info.setTime(TimeUtils.getNowTime(TimeUtils.DATE_TYPE1));
+        info.save();
+        toast("添加书签成功!");
     }
 
     @Override
     public void onFavorite() {
-        boolean js = SpUtils.getInfo("js", true);
-        SpUtils.save(this, "js", !js);
-        mCurrentWeb.setJs(!js);
+        openActivityForResult(FavoriteActivity.class, HISTORY_REQUEST_CODE);
     }
 
     @Override
@@ -168,6 +171,21 @@ public class WebMainFragment extends BaseFragment implements SettingListener, We
     @Override
     public void onRefresh() {
         mCurrentWeb.onRefresh();
+    }
+
+    @Override
+    public void onClose() {
+        mWebData.remove(mCurrentWeb);
+        if (mWebData.size() <= 0) {
+            initData();
+        } else {
+            FragmentManager manager = getChildFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            WebFragment fragment = mWebData.get(0);
+            transaction.show(fragment);
+            mCurrentWeb = fragment;
+            transaction.commit();
+        }
     }
 
     @Override

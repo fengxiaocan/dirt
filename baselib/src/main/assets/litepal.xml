@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
     <dbname value="dirt" />
-    <version value="1" />
+    <version value="2" />
 
     <list>
         <mapping class="com.evil.baselib.db.DownInfo" />
         <mapping class="com.evil.baselib.db.UserDb" />
         <mapping class="com.evil.baselib.db.InputHistoryInfo" />
         <mapping class="com.evil.baselib.db.HistoryInfo" />
+        <mapping class="com.evil.baselib.db.FavoriteInfo" />
     </list>
 </litepal>

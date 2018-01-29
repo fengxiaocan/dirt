@@ -1,6 +1,5 @@
 package com.evil.web.ui;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,9 +14,11 @@ import com.evil.app.R;
 import com.evil.baselib.base.BaseActivity;
 import com.evil.baselib.db.HistoryInfo;
 import com.evil.web.adapter.HistoryAdapter;
+import com.fxc.base.dialog.DialogCancelListener;
+import com.fxc.base.dialog.IosDialog;
+import com.fxc.util.RefreshUtils;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
-import com.lcodecore.tkrefreshlayout.footer.LoadingView;
 
 import org.litepal.crud.DataSupport;
 
@@ -53,7 +54,7 @@ public class HistoryActivity
         mIvBack = (ImageView) findViewById(R.id.iv_back);
         mTvClear = (TextView) findViewById(R.id.tv_clear);
         mTkrefresh = (TwinklingRefreshLayout) findViewById(R.id.tkrefresh);
-        mTkrefresh.setBottomView(new LoadingView(getContext()));
+        RefreshUtils.initRefreshLayout(mTkrefresh,this);
         mTkrefresh.setEnableRefresh(false);
         mTkrefresh.setOnRefreshListener(mRefreshListener);
         setOnClick(mIvBack, mTvClear);
@@ -109,23 +110,20 @@ public class HistoryActivity
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage("是否删除该条记录?");
-        builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+        IosDialog iosDialog = new IosDialog(getContext());
+        iosDialog.setTitle("提示");
+        iosDialog.setMessage("是否删除该条记录?");
+        iosDialog.setLeftButton("确定",new DialogCancelListener(){
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog) {
+                super.onClick(dialog);
                 HistoryInfo info = mAdapter.getItem(position);
                 info.delete();
                 mAdapter.delete(position);
             }
         });
-        builder.setNeutralButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.show();
+        iosDialog.setRightButton("取消",new DialogCancelListener());
+        iosDialog.show();
         return true;
     }
 }

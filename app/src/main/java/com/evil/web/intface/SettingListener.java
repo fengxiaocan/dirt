@@ -57,4 +57,10 @@ public interface SettingListener {
      * 刷新
      */
     void onRefresh();
+
+    /**
+     * 关闭
+     */
+    void onClose();
+
 }

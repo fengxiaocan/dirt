@@ -28,7 +28,6 @@ import com.evil.web.intface.WebConstants;
 import com.evil.web.intface.WebViewClientListener;
 import com.fxc.base.dialog.DialogCancelListener;
 import com.fxc.base.dialog.IosDialog;
-import com.fxc.log.LogUtils;
 import com.fxc.util.ClipboardUtils;
 import com.fxc.util.SDCardUtils;
 import com.fxc.util.SpUtils;
@@ -402,10 +401,12 @@ public class WebFragment
 
         @JavascriptInterface
         public void showSource(String html) {
-            LogUtils.e("noah", html);
-            IosDialog iosDialog = new IosDialog(getContext());
-            iosDialog.setMessage(html);
-            iosDialog.show();
+            Bundle bundle = newBundle();
+            bundle.putString("html",html);
+            openActivity(HtmlActivity.class,bundle);
+//            IosDialog iosDialog = new IosDialog(getContext());
+//            iosDialog.setMessage(html);
+//            iosDialog.show();
         }
     }
 }
