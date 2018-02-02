@@ -3,7 +3,6 @@ package com.evil.baselib.db;
 import com.fxc.key.Md5Utils;
 import com.liulishuo.filedownloader.util.FileDownloadUtils;
 
-import org.litepal.annotation.Column;
 import org.litepal.crud.DataSupport;
 
 import java.io.File;
@@ -17,34 +16,29 @@ import java.io.File;
  * @desc： TODO
  */
 
-public class DownInfo extends DataSupport {
+public class DownedInfo extends DataSupport {
     private int id;
     private String name;
     private String md5;
     private String url;
     private String savePath;
-    private long createTime;
+    private long downTime;
     private long totalSize;
-    private long downSize;
-    private boolean isDowned;//是否下载完成
 
-    @Column(ignore = true)  // 忽略
-    private boolean isDowning;
-
-    public boolean isDowning() {
-        return isDowning;
+    public static DownedInfo createDownedInfo(DowningInfo infos) {
+        DownedInfo info = new DownedInfo();
+        info.setId(infos.getId());
+        info.setDownTime(System.currentTimeMillis());
+        info.setUrl(infos.getUrl());
+        info.setName(infos.getName());
+        info.setTotalSize(infos.getTotalSize());
+        info.setSavePath(infos.getSavePath());
+        return info;
     }
 
-    public void setDowning(boolean downing) {
-        isDowning = downing;
-    }
 
     public void createId() {
         id = FileDownloadUtils.generateId(url, savePath);
-    }
-
-    public void createTime() {
-        createTime = System.currentTimeMillis();
     }
 
     public long getTotalSize() {
@@ -53,14 +47,6 @@ public class DownInfo extends DataSupport {
 
     public void setTotalSize(long totalSize) {
         this.totalSize = totalSize;
-    }
-
-    public long getDownSize() {
-        return downSize;
-    }
-
-    public void setDownSize(long downSize) {
-        this.downSize = downSize;
     }
 
     public int getId() {
@@ -79,6 +65,14 @@ public class DownInfo extends DataSupport {
         this.md5 = md5;
     }
 
+    public long getDownTime() {
+        return downTime;
+    }
+
+    public void setDownTime(long downTime) {
+        this.downTime = downTime;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -93,7 +87,7 @@ public class DownInfo extends DataSupport {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DownInfo downInfo = (DownInfo) o;
+        DownedInfo downInfo = (DownedInfo) o;
 
         if (md5 != null ? !md5.equals(downInfo.md5) : downInfo.md5 != null) return false;
         return url != null ? url.equals(downInfo.url) : downInfo.url == null;
@@ -106,28 +100,12 @@ public class DownInfo extends DataSupport {
         return result;
     }
 
-    public boolean isDowned() {
-        return isDowned;
-    }
-
-    public void setDowned(boolean downed) {
-        isDowned = downed;
-    }
-
     public String getSavePath() {
         return savePath;
     }
 
     public void setSavePath(String savePath) {
         this.savePath = savePath;
-    }
-
-    public long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(long createTime) {
-        this.createTime = createTime;
     }
 
     public String getName() {

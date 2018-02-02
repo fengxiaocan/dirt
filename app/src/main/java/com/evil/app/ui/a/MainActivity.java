@@ -26,11 +26,14 @@ public class MainActivity extends BaseActivity {
 
     private android.support.v4.app.FragmentTabHost mTabHost;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+
+
     }
 
     private void initView() {

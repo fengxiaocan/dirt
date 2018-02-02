@@ -58,10 +58,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:drawableLeft="@mipmap/set_down"
+            android:drawableLeft="@mipmap/set_shengji"
             android:drawablePadding="20px"
             android:padding="20px"
-            android:text="下载"
+            android:text="下载内容"
+            android:textSize="16sp" />
+
+        <View
+            style="@style/HorizontalLine"
+            android:layout_marginLeft="80px" />
+
+        <TextView
+            android:id="@+id/tv_downed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:drawableLeft="@mipmap/set_qiehuan"
+            android:drawablePadding="20px"
+            android:padding="20px"
+            android:text="下载记录"
+            android:textSize="16sp" />
+
+        <View
+            style="@style/HorizontalLine"
+            android:layout_marginLeft="80px" />
+
+        <TextView
+            android:id="@+id/tv_new_down"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:drawableLeft="@mipmap/set_huifu"
+            android:drawablePadding="20px"
+            android:padding="20px"
+            android:text="添加下载"
             android:textSize="16sp" />
     </LinearLayout>
 </ScrollView>

@@ -28,7 +28,6 @@
     <color name="themeAccentColor">#F23030</color>
     <color name="main_title">#77ffffff</color>
     <!--End 主题色-->
-    <color name="hong">#f00</color>
     <color name="province_line_border">#C7C7C7</color>
     <color name="statusBackgroundWhite">#E0E0E0</color>
     <color name="barBackgroundWhite">#F5F5F5</color>
@@ -50,7 +49,6 @@
     <color name="colorDisabled">#EFEFEF</color>
     <color name="BlackColor">#000000</color>
     <color name="Transparent">#00000000</color>
-    <color name="RedColor">#ff0000</color>
     <color name="GrayColor">#99000000</color>
     <color name="WhiteColor">#ffffff</color>
     <color name="colorBlack">#000000</color>
