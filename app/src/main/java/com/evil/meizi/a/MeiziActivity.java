@@ -88,7 +88,7 @@ public class MeiziActivity extends BaseActivity {
                         MeiziCallback() {
                             @Override
                             public void onResult(List<Meizi> list) {
-                                mAdapter.setData(list);
+                                mAdapter.addData(list);
                                 position++;
                                 refreshLayout.finishLoadmore();
                             }
