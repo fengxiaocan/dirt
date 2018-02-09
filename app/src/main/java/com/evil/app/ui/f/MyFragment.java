@@ -54,6 +54,7 @@ public class MyFragment extends BaseFragment {
                     mInputDialog = new InputDialog(getContext());
                     mInputDialog.setTitle("下载提示");
                     mInputDialog.setInputHint("请输入下载地址");
+                    mInputDialog.setInputMessage("");
                     mInputDialog.setInputResultListener(new InputResultListener() {
                         @Override
                         public void onResult(String url) {

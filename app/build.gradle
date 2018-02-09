@@ -29,4 +29,5 @@ dependencies {
     implementation rootProject.ext.dependencies.design
     implementation rootProject.ext.dependencies.baseapp
     implementation rootProject.ext.dependencies.filedown
+    implementation rootProject.ext.dependencies.glide
 }
