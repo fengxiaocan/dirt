@@ -45,6 +45,7 @@
         <activity android:name="com.evil.my.a.DownedActivity" />
         <activity android:name="com.evil.my.a.DownActivity" />
         <activity android:name="com.evil.my.a.DowningActivity" />
+        <activity android:name="com.evil.meizi.a.MeiziActivity" />
 
         <service android:name=".service.AppService" />
     </application>

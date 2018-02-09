@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.evil.app.R;
 import com.evil.baselib.base.BaseFragment;
 import com.evil.baselib.db.DowningInfo;
+import com.evil.meizi.a.MeiziActivity;
 import com.evil.my.a.DownActivity;
 import com.evil.my.a.DownedActivity;
 import com.fxc.base.dialog.InputDialog;
@@ -29,6 +30,7 @@ public class MyFragment extends BaseFragment {
     @Override
     public void initView(View view, Bundle savedInstanceState) {
         mHolder = new ViewHolder(view);
+        mHolder.mTvPeople.setOnClickListener(this);
         mHolder.mTvDown.setOnClickListener(this);
         mHolder.mTvDowned.setOnClickListener(this);
         mHolder.mTvNewDown.setOnClickListener(this);
@@ -38,6 +40,9 @@ public class MyFragment extends BaseFragment {
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
+            case R.id.tv_people:
+                openActivity(MeiziActivity.class);
+                break;
             case R.id.tv_down:
                 openActivity(DownActivity.class);
                 break;
